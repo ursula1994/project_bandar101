@@ -1,0 +1,58 @@
+set.seed(42)
+s <- sample(c('m', 'f'), size = 200, T)
+
+y <- numeric(200)
+
+for (i in seq_along(s)){
+    y[i] <- ifelse(s[i] == 'm', rnorm(1, 4, 1), rnorm(1, 5, 1))
+}
+
+d <- data.frame(years = y, sex = s)
+
+summary(d)
+
+##      years       sex    
+##  Min.   :1.300   f:111  
+##  1st Qu.:3.801   m: 89  
+##  Median :4.532          
+##  Mean   :4.506          
+##  3rd Qu.:5.173          
+##  Max.   :7.460
+
+##      years sex
+## 1 6.200965   f
+## 2 6.044751   f
+## 3 2.996791   m
+## 4 6.848482   f
+## 5 4.333227   f
+## 6 5.105514   f
+
+
+##      years       sex         dummy      
+##  Min.   :1.300   f:111   Min.   :0.000  
+##  1st Qu.:3.801   m: 89   1st Qu.:0.000  
+##  Median :4.532           Median :0.000  
+##  Mean   :4.506           Mean   :0.445  
+##  3rd Qu.:5.173           3rd Qu.:1.000  
+##  Max.   :7.460           Max.   :1.000
+
+## 
+## Call:
+## lm(formula = years ~ dummy, data = d)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -2.66181 -0.62734  0.00436  0.60054  2.74001 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)   4.9424     0.0914  54.073  < 2e-16 ***
+## dummy        -0.9805     0.1370  -7.156 1.58e-11 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 0.963 on 198 degrees of freedom
+## Multiple R-squared:  0.2055, Adjusted R-squared:  0.2015 
+## F-statistic: 51.21 on 1 and 198 DF,  p-value: 1.578e-11
+
+#Bandar101
